@@ -2,7 +2,7 @@ on:
   push:
 jobs:
   test:
-    name: Test `conda create`
+    name: Test conda create
     runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
@@ -14,6 +14,8 @@ jobs:
           deps: conda-forge::jaxlib conda-forge::jax
     steps:
       - uses: conda-incubator/setup-miniconda@v2
+        with:
+          auto-activate-base: true
       - run: conda info
         shell: bash -l {0}
       - run: conda list
