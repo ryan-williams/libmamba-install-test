@@ -2,22 +2,13 @@ on:
   push:
 jobs:
   test:
-    name: Test conda create
+    name: Test matrix colon text
     runs-on: ubuntu-22.04
     strategy:
       matrix:
         include:
-        - env: jax-jaxlib
-          deps: "abc"
-        - env: jaxlib-jax
-          deps: "def"
+        - text: "contains a : colon"
+        - text: "doesn't contain a colon"
     steps:
-      - uses: conda-incubator/setup-miniconda@v2
-        with:
-          auto-activate-base: true
-      - run: conda info
-        shell: bash -l {0}
-      - run: conda list
-        shell: bash -l {0}
-      - run: conda env list
-        shell: bash -l {0}
+      - run: |
+          echo "Text: ${{ matrix.text }}"
