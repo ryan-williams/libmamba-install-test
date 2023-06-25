@@ -7,11 +7,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
-        - env: jax-jaxlib
-          deps: jax jaxlib
-        - env: jaxlib-jax
-          deps: jaxlib jax
+        solver: [ default, mamba ]
+        deps: [ "jax jaxlib", "jaxlib jax" ]
     steps:
       - uses: conda-incubator/setup-miniconda@v2
       - run: conda info
@@ -20,5 +17,13 @@ jobs:
         shell: bash -l {0}
       - run: conda env list
         shell: bash -l {0}
-      - run: conda create -n ${{ matrix.env }} -d ${{ matrix.deps }}
+      - name: Maybe install and configure libmamba solver
+        if: matrix.solver == 'mamba'
+        run: |
+          conda install -n base conda-libmamba-solver
+          conda config --set solver libmamba
+        shell: bash -l {0}
+      - run: conda config --get solver
+        shell: bash -l {0}
+      - run: conda create -n jax-test -d ${{ matrix.deps }}
         shell: bash -l {0}
