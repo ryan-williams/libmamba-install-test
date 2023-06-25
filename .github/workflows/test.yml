@@ -5,7 +5,6 @@ jobs:
     name: Test conda create
     runs-on: ubuntu-22.04
     strategy:
-      fail-fast: false
       matrix:
         include:
         - env: jax-jaxlib
@@ -21,6 +20,4 @@ jobs:
       - run: conda list
         shell: bash -l {0}
       - run: conda env list
-        shell: bash -l {0}
-      - run: conda create -n ${{ matrix.env }} -d ${{ matrix.deps }}
         shell: bash -l {0}
