@@ -9,9 +9,9 @@ jobs:
       matrix:
         include:
         - env: jax-jaxlib
-          deps: conda-forge::jax conda-forge::jaxlib
+          deps: jax jaxlib
         - env: jaxlib-jax
-          deps: conda-forge::jaxlib conda-forge::jax
+          deps: jaxlib jax
     steps:
       - uses: conda-incubator/setup-miniconda@v2
       - run: conda info
