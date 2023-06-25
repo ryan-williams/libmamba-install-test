@@ -7,8 +7,10 @@ jobs:
     strategy:
       matrix:
         include:
-        - text: "contains a : colon"
-        - text: "doesn't contain a colon"
+        - text: "job param contains a : colon"
+        - text: "job param doesn't contain a colon"
+        - text: "another job with a : colon"
+        - text: "another job without a colon"
     steps:
       - run: |
           echo "Text: ${{ matrix.text }}"
