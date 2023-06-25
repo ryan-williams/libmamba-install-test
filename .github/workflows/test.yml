@@ -25,5 +25,5 @@ jobs:
         shell: bash -l {0}
       - run: conda config --get solver
         shell: bash -l {0}
-      - run: conda create -n jax-test -d ${{ matrix.deps }}
+      - run: conda create -n jax-test -d -c conda-forge ${{ matrix.deps }}
         shell: bash -l {0}
